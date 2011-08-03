@@ -11,7 +11,7 @@ We'd love to have a **restful** API that we could use to track each game and poi
 * It should accept and respond JSON format.
 * You can use any database or storage strategy you'd like.
 * The API should be live when you deliver it, you can set a free [heroku](http://heroku.com) account.
-* Adding tests is optional, but it will add extra points. (You can any testing library).
+* Adding tests is optional, but it will add extra points. (You can use any testing library).
 * Fork this repo to your own github account and work there.
 
 ## The specs

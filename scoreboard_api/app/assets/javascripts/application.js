@@ -11,5 +11,18 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
-//= require_tree .
+$(document).ready(function() {
+  $.ajax({
+    url: '/users.json',
+    type: 'get',
+    dataType: 'json',
+    success: function(data)
+    {
+      var players;
+      for(player in data)
+      {
+        players.push(data[player]);
+      }
+    }
+  });
+});

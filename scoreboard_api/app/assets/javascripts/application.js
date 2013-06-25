@@ -12,17 +12,63 @@
 //
 //= require jquery
 $(document).ready(function() {
-  $.ajax({
-    url: '/users.json',
-    type: 'get',
-    dataType: 'json',
-    success: function(data)
-    {
-      var players;
-      for(player in data)
+  function listUsers() {
+    $.ajax({
+      url: '/users.json',
+      type: 'get',
+      dataType: 'json',
+      success: function(data)
       {
-        players.push(data[player]);
+        var players;
+        $('#players_list').html('');
+        for(user in data)
+        {
+          var player = data[user];
+          $('#players_list').append('<div>'+player.name+'<a href="#" class="view_user" data-id="'+player.id+'">Ver</a></div>');
+        }
       }
-    }
+    });
+  }
+  
+  function displayUser(player)
+  {
+    $('#player_details').html('');
+    $('#player_details').append('<div><h3>'+player.name+'</h3><p>Wins: '+player.wins_count+'</p><p>Loses: '+player.loses_count+'</p></div>');
+  }
+  
+  $('#user_form').submit(function() {
+    var form_data = $(this).serialize();
+    $.ajax({
+      url: '/users.json',
+      type: 'post',
+      data: form_data,
+      dataType: 'json',
+      success: function(data)
+      {
+        var player = data;
+        displayUser(player);
+        $('#user_form').each(function() {this.reset()});
+        listUsers();
+      }
+    });
+    return false;
   });
+  
+  $('.view_user').on('click', function(e) {
+    var user_id = $(this).data('id');
+    console.log(user_id);
+    $.ajax({
+      url: '/users/'+user_id,
+      type: 'get',
+      dataType: 'json',
+      success: function(data)
+      {
+        console.log(data);
+        var player = data;
+        displayUser(player);
+      }
+    });
+  });
+  
+  listUsers();
 });

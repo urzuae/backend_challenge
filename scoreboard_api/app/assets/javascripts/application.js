@@ -24,7 +24,8 @@ $(document).ready(function() {
         for(user in data)
         {
           var player = data[user];
-          $('#players_list').append('<div>'+player.name+'<a href="#" class="view_user" data-id="'+player.id+'">Ver</a></div>');
+          $('#players_list').append('<div>'+player.name+'<a href="#" class="view_user" data-id="'+player.id+'">Ver</a>'
+            +' <a href="#" class="delete_user" data-id="'+player.id+'">Eliminar</a> </div>');
         }
       }
     });
@@ -54,9 +55,8 @@ $(document).ready(function() {
     return false;
   });
   
-  $('.view_user').on('click', function(e) {
+  $('body').on('click', 'a.view_user', function(e) {
     var user_id = $(this).data('id');
-    console.log(user_id);
     $.ajax({
       url: '/users/'+user_id,
       type: 'get',
@@ -66,6 +66,22 @@ $(document).ready(function() {
         console.log(data);
         var player = data;
         displayUser(player);
+      }
+    });
+  });
+  
+  $('body').on('click', 'a.delete_user', function(e) {
+    var user_id = $(this).data('id');
+    if(confirm("¿Estás seguro de eliminar este registro?"))
+    $.ajax({
+      url: '/users/'+user_id,
+      type: 'delete',
+      dataType: 'json',
+      success: function(data)
+      {
+        console.log(data);
+        var player = data;
+        listUsers();
       }
     });
   });

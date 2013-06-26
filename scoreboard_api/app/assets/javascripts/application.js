@@ -58,7 +58,7 @@ $(document).ready(function() {
   $('body').on('click', 'a.view_user', function(e) {
     var user_id = $(this).data('id');
     $.ajax({
-      url: '/users/'+user_id,
+      url: '/users/'+user_id+'.json',
       type: 'get',
       dataType: 'json',
       success: function(data)

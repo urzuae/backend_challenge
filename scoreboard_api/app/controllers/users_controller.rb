@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new({:name => params[:name], :wins_count => 0, :loses_count => 0})
+    @user = User.new({:name => params[:name]})
     if @user.save
       render json: @user, status: :created, location: @user
     else

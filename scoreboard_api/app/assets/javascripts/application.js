@@ -21,11 +21,15 @@ $(document).ready(function() {
       {
         var players;
         $('#players_list').html('');
+        $('#playerA').html('');
+        $('#playerB').html('');
         for(user in data)
         {
           var player = data[user];
           $('#players_list').append('<div>'+player.name+'<a href="#" class="view_user" data-id="'+player.id+'">Ver</a>'
             +' <a href="#" class="delete_user" data-id="'+player.id+'">Eliminar</a> </div>');
+          $('#playerA').append('<option value="'+player.id+'">'+player.name+'</option>');
+          $('#playerB').append('<option value="'+player.id+'">'+player.name+'</option>');
         }
       }
     });
@@ -50,6 +54,22 @@ $(document).ready(function() {
         displayUser(player);
         $('#user_form').each(function() {this.reset()});
         listUsers();
+      }
+    });
+    return false;
+  });
+  
+  $('#game_form').submit(function() {
+    var form_data = $(this).serialize();
+    $.ajax({
+      url: '/games.json',
+      data: form_data,
+      dataType: 'json',
+      type: 'post',
+      success: function(data)
+      {
+        var game = data.game;
+        console.log(game);
       }
     });
     return false;

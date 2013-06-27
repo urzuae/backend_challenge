@@ -1,8 +1,8 @@
 class Game < ActiveRecord::Base
-  attr_accessible :winner
+  attr_accessible :winner_id
   
-  has_many :game_players, dependent: :destroy
-  has_many :players, through: :game_players, source: :player
-  has_one :winner, class_name: "User"
+  belongs_to :winner, class_name: "User"
+  has_many :game_players
+  has_many :players, through: :game_players
   
 end

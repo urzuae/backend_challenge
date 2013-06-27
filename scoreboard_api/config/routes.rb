@@ -1,6 +1,9 @@
 ScoreboardApi::Application.routes.draw do
   resources :users, :defaults => {:format => :json}
   resources :games, :defaults => {:format => :json}, :except => [:index, :destroy, :edit, :new]
+  match 'games/:id/score(.:format)' => 'games#score', :as => :score
+  match 'games/:id/reset_point(.:format)' => 'games#reset_point', :as => :reset_point
+  match 'games/:id/end(.:format)' => 'games#end', :as => :end
   resources :leaderboard, :only => [:index], :defaults => {:format => :json}
   root :to => 'scoreboard#index'
   # The priority is based upon order of creation:

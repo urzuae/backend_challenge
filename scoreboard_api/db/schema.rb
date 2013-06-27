@@ -15,14 +15,18 @@ ActiveRecord::Schema.define(:version => 20130626055447) do
 
   create_table "game_players", :force => true do |t|
     t.integer  "game_id"
-    t.integer  "player"
+    t.integer  "player_id"
     t.integer  "points",     :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
 
+  add_index "game_players", ["game_id", "player_id"], :name => "index_game_players_on_game_id_and_player_id", :unique => true
+  add_index "game_players", ["game_id"], :name => "index_game_players_on_game_id"
+  add_index "game_players", ["player_id"], :name => "index_game_players_on_player_id"
+
   create_table "games", :force => true do |t|
-    t.integer  "winner",     :default => 0
+    t.integer  "winner_id",  :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

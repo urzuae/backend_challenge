@@ -7,7 +7,4 @@ class GamePlayer < ActiveRecord::Base
   validates :game_id, presence: true
   validates :player_id, presence: true
   
-  def find_by_player(player, game)
-    
-  end
 end

@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   
-  belongs_to :winner, class_name: "User"
+  belongs_to :winner, foreign_key: :winner_id, class_name: "User"
   has_many :game_players
   has_many :players, through: :game_players
   

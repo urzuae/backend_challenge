@@ -4,9 +4,10 @@ describe User do
   
   describe "relationships" do
     it { should have_many(:game_players) }
+    it { should have_many(:games_won) }
   end
   
-  describe "attr_accesible attributes" do
+  describe "accesible attributes" do
     it { should allow_mass_assignment_of(:name) }
   end
 

@@ -3,11 +3,16 @@ require 'spec_helper'
 describe GamesController do
 
   describe "#show" do
-    context "getting information of a game" do
+    context "when a game is found" do
+      let(:playerA) { FactoryGirl.create :user }
+      let(:playerB) { FactoryGirl.create :user, name: 'Henruz' }
+      let(:game)    { FactoryGirl.create :game }
+
       before do
-        @game = Factory(:game, :winner_id => 1)
-        get :show, :id => @game
-      end    
+        game.game_players.create!({player_id: playerA.id})
+        game.game_players.create!({player_id: playerB.id})
+        get :show, :id => game.id
+      end
 
       it { should respond_with(:success) }
 

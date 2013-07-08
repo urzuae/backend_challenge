@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_filter :check_players, :only => :create
-  before_filter :find_game, :expect => :create
+  before_filter :find_game, :except => :create
   before_filter :find_player, :only => [:score, :reset_point]
   before_filter :check_score, :only => [:reset_point]
   before_filter :check_ended_game, :only => [:end, :score, :reset_point]

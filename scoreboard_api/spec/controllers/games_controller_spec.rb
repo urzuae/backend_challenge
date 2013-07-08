@@ -32,6 +32,4 @@ describe GamesController do
     end
   end
 
-  describe 
-
 end

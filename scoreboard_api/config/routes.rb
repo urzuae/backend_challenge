@@ -1,5 +1,5 @@
 ScoreboardApi::Application.routes.draw do
-  resources :users, :defaults => {:format => :json}
+  resources :users, :defaults => {:format => :json}, :except => [:index, :edit, :new]
   resources :games, :defaults => {:format => :json}, :except => [:index, :destroy, :edit, :new]
   match 'games/:id/score(.:format)' => 'games#score', :as => :score
   match 'games/:id/reset_point(.:format)' => 'games#reset_point', :as => :reset_point
